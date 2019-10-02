@@ -2,6 +2,7 @@
   "name": "svc-email-middleware-test",
   "profile": "up-deployer",
   "regions": ["ap-southeast-2"],
+  "runtime": "nodejs8.10.x",
   "environment": {
     "MID": "100016247",
     "REDIS_URL": "svc-email-middleware-test.wtwcbs.0001.apse2.cache.amazonaws.com:6379",
