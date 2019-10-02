@@ -13,15 +13,17 @@
   "error_pages": {
     "disable": true
   },
-  "vpc": {
-    "subnets": [
-      "subnet-8e1b47f8",
-      "subnet-44d3481d",
-      "subnet-44d3481d"
-    ],
-    "security_groups": [
-        "sg-d20a27b5"
-    ]
+  "lambda": {
+    "vpc": {
+      "subnets": [
+        "subnet-8e1b47f8",
+        "subnet-44d3481d",
+        "subnet-44d3481d"
+      ],
+      "security_groups": [
+          "sg-d20a27b5"
+      ]
+    }
   }
 }
 
