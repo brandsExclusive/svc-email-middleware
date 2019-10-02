@@ -2,7 +2,6 @@
   "name": "svc-email-middleware-production",
   "profile": "up-deployer",
   "regions": ["ap-southeast-2"],
-  "runtime": "nodejs8.10.x",
   "environment": {
     "MID": "100016247",
     "REDIS_URL": "127.0.0.1:6379",
