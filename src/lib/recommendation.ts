@@ -11,7 +11,6 @@ export default async function recommendation(
 ): Promise<string> {
   return new Promise(
     async (resolve, reject): Promise<string|void> => {
-      console.log(redis);
       let allRecommendations;
       allRecommendations = await redis.get(userId);
 
