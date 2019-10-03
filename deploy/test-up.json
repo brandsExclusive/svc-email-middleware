@@ -20,7 +20,8 @@
         "subnet-44d3481d",
         "subnet-7bde4522",
         "subnet-28a9874c",
-        "subnet-f6dc47af"
+        "subnet-f6dc47af",
+        "subnet-6a19451c"
       ],
       "security_groups": [
           "sg-d20a27b5"
