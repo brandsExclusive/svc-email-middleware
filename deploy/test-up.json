@@ -18,9 +18,9 @@
       "subnets": [
         "subnet-8e1b47f8",
         "subnet-44d3481d",
-        "subnet-44d3481d",
+        "subnet-7bde4522",
         "subnet-28a9874c",
-        "subnet-6a19451c"
+        "subnet-f6dc47af"
       ],
       "security_groups": [
           "sg-d20a27b5"
