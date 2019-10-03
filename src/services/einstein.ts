@@ -13,6 +13,7 @@ export default async function einstein(
   console.log(url);
   const resp = await fetch(url);
   const data = await resp.json();
+  console.log('status code', resp.status);
   if (resp.status === 200) {
     await redis.set(userId, JSON.stringify(data), "EX", CACHE_EXPIRY);
   } else {
