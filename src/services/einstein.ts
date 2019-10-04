@@ -16,6 +16,7 @@ export default async function einstein(
   console.log('status code', resp.status);
   console.log('data', data);
   if (resp.status === 200) {
+    console.log('setting data');
     await redis.set(userId, JSON.stringify(data), "EX", CACHE_EXPIRY);
   } else {
     console.log(`Error getting recommendations from Einstein`);

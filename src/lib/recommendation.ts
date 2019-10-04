@@ -25,7 +25,7 @@ export default async function recommendation(
             15
           );
           await einstein(userId, recommendationId, redis);
-          allRecommendations = await redis.get(recommendationId);
+          allRecommendations = await redis.get(userId);
         } else {
           await timeout(20);
           return resolve(recommendation(userId, recommendationId, index));
