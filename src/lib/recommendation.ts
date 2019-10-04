@@ -33,6 +33,7 @@ export default async function recommendation(
       }
 
       allRecommendations = JSON.parse(allRecommendations);
+      console.log('what is allRecommendations', allRecommendations);
       const recommendations = allRecommendations.filter(rec => {
         if (rec.name === recommendationId) {
           return rec;
