@@ -16,18 +16,23 @@ export async function index(
   */
   const latency = Math.floor(Math.random() * 50);
   await timeout(latency);
-  let recommendedProductCode;
+  let recommended;
   try {
-    recommendedProductCode = await recommendation(
+    recommended = await recommendation(
       req.params.userId,
       req.params.recommendationId,
       req.params.index
     );
   } catch (err) {
     console.log(err);
-    recommendedProductCode = "default";
+    recommended = {
+      product_code: "default"
+    };
   }
-  const redirectUrl = buildImageUrl(recommendedProductCode, req.params.layout);
+  const redirectUrl = buildImageUrl(
+    recommended.product_code,
+    req.params.layout
+  );
   res.status(302);
   res.redirect(redirectUrl);
   return res.end();
