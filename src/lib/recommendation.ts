@@ -1,6 +1,7 @@
 import einstein from "../services/einstein";
 import * as Redis from "ioredis";
 import timeout from "../lib/timeout";
+import { IRecommendation } from "../types";
 
 const redis = new Redis(process.env.REDIS_URL);
 
@@ -8,9 +9,9 @@ export default async function recommendation(
   userId: string,
   recommendationId: string,
   index: string
-): Promise<string> {
+): Promise<IRecommendation> {
   return new Promise(
-    async (resolve, reject): Promise<string | void> => {
+    async (resolve, reject): Promise<IRecommendation | void> => {
       let allRecommendations;
       allRecommendations = await redis.get(userId);
 
@@ -39,7 +40,7 @@ export default async function recommendation(
         }
       })[0];
       if (recommendations && recommendations.items) {
-        return resolve(recommendations.items[index].product_code);
+        return resolve(recommendations.items[index]);
       } else {
         return reject(
           new Error(
