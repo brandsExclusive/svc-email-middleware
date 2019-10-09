@@ -10,7 +10,7 @@ export default async function recommendation(
   index: string
 ): Promise<string> {
   return new Promise(
-    async (resolve, reject): Promise<string|void> => {
+    async (resolve, reject): Promise<string | void> => {
       let allRecommendations;
       allRecommendations = await redis.get(userId);
 
