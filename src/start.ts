@@ -1,6 +1,6 @@
 const appEnv = process.env.APP_ENV || "developement";
 
-if (appEnv !== 'production') {
+if (appEnv !== "production") {
   require("dotenv-safe").config({
     path: ".env"
   });

@@ -3,7 +3,10 @@ import recommendation from "../lib/recommendation";
 import buildImageUrl from "../lib/buildImageUrl";
 import timeout from "../lib/timeout";
 
-export async function index(req: Request, res: Response): Promise <Response|void> {
+export async function index(
+  req: Request,
+  res: Response
+): Promise<Response | void> {
   /*
     Multiple requests come in at the same moment from a email open, manually add some latency to the
     process allowing the request with the lowest manual latency to trigger the function that gets
@@ -24,7 +27,7 @@ export async function index(req: Request, res: Response): Promise <Response|void
     console.log(err);
     recommendedProductCode = "default";
   }
-  const redirectUrl = buildImageUrl(recommendedProductCode);
+  const redirectUrl = buildImageUrl(recommendedProductCode, req.params.layout);
   res.status(302);
   res.redirect(redirectUrl);
   return res.end();
