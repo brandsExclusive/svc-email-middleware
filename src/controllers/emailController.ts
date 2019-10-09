@@ -24,7 +24,7 @@ export async function index(req: Request, res: Response): Promise <Response|void
     console.log(err);
     recommendedProductCode = "default";
   }
-  const redirectUrl = buildImageUrl(recommendedProductCode);
+  const redirectUrl = buildImageUrl(recommendedProductCode, req.params.layout);
   res.status(302);
   res.redirect(redirectUrl);
   return res.end();

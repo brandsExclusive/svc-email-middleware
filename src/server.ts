@@ -5,7 +5,7 @@ export default function server(): any {
   const app: express.Application = express();
 
   app.get(
-    "/api/recommendations/email-image/:index/:recommendationId/:userId",
+    "/api/recommendations/email-image/:layout(mobile|desktop)/:index/:recommendationId/:userId",
     emailController.index
   );
 
