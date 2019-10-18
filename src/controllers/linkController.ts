@@ -5,7 +5,7 @@ export async function index(
   req: Request,
   res: Response
 ): Promise<Response | void> {
-  console.log(JSON.stringify(req.headers));
+  console.log('headers', JSON.stringify(req.headers));
   const recommended = await recommendation(
     req.params.userId,
     req.params.recommendationId,
