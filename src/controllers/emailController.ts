@@ -16,7 +16,7 @@ export async function index(
   */
   const latency = Math.floor(Math.random() * 50);
   const isMobile = req.headers["cloudfront-is-mobile-viewer"] === "true"
-  console.log(`is mobile layout ${isMobile}`);
+  console.log(`is mobile layout ${isMobile} user agent: ${req.headers["user-agent"]}`);
   await timeout(latency);
   let recommended;
   try {
