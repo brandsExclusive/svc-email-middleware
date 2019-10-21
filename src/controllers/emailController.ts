@@ -14,7 +14,7 @@ export async function index(
 
     If this is not set multiple calls will be made to Einstein costing us more money
   */
-  console.log(`headers: ${req.headers}`);
+  console.log(`headers: ${JSON.stringify(req.headers)}`);
   const latency = Math.floor(Math.random() * 50);
   const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true"
   const isMobilUrl = req.params.layout === "mobile"
