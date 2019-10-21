@@ -16,8 +16,9 @@ export async function index(
   */
   console.log(`headers: ${req.headers}`);
   const latency = Math.floor(Math.random() * 50);
-  const isMobile = req.headers["cloudfront-is-mobile-viewer"] === "true"
-  console.log(`is mobile layout ${isMobile} user agent: ${req.headers["user-agent"]}`);
+  const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true"
+  const isMobilUrl = req.params.layout === "mobile"
+  console.log(`is mobile url ${isMobilUrl} is mobile header ${isMobileHeader} user agent: ${req.headers["user-agent"]}`);
   await timeout(latency);
   let recommended;
   try {
@@ -34,7 +35,7 @@ export async function index(
   }
   const redirectUrl = buildImageUrl(
     recommended.product_code,
-    isMobile
+    isMobileHeader
   );
   res.status(302);
   res.redirect(redirectUrl);
