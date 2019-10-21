@@ -16,6 +16,7 @@ export async function index(
   */
   console.log("headers", JSON.stringify(req.headers));
   const latency = Math.floor(Math.random() * 50);
+  console.log("whats the latency", latency);
   await timeout(latency);
   let recommended;
   try {
