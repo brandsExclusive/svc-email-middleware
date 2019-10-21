@@ -14,9 +14,9 @@ export async function index(
 
     If this is not set multiple calls will be made to Einstein costing us more money
   */
-  console.log("headers", JSON.stringify(req.headers));
   const latency = Math.floor(Math.random() * 50);
-  console.log("whats the latency", latency);
+  const isMobile = req.headers["cloudfront-is-mobile-viewer"] === "true"
+  console.log(`is mobile layout ${isMobile}`);
   await timeout(latency);
   let recommended;
   try {
@@ -33,7 +33,7 @@ export async function index(
   }
   const redirectUrl = buildImageUrl(
     recommended.product_code,
-    req.params.layout
+    isMobile
   );
   res.status(302);
   res.redirect(redirectUrl);
