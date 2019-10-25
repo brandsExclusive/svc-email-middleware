@@ -10,8 +10,10 @@ export default async function einstein(
   redis: any
 ): Promise<any> {
   const url = `https://${MID}.recs.igodigital.com/a/v2/${MID}/${RECOMMENDATION}/recommend.json?email=${userId}`;
+  console.log('url used', url);
   const resp = await fetch(url);
   const data = await resp.json();
+  console.log('return data', data);
   if (resp.status === 200) {
     await redis.set(userId, JSON.stringify(data), "EX", CACHE_EXPIRY);
   } else {
