@@ -41,6 +41,9 @@ export async function index(
     recommended.product_code,
     isMobile
   );
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
   res.status(302);
   res.redirect(redirectUrl);
   return res.end();
