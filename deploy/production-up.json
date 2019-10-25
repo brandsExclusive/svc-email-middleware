@@ -5,7 +5,7 @@
   "environment": {
     "MID": "100016247",
     "REDIS_URL": "svc-email-middleware-test.wtwcbs.0001.apse2.cache.amazonaws.com:6379",
-    "RECOMMENDATION": "email",
+    "RECOMMENDATION": "testing-email",
     "CACHE_EXPIRY": "10",
     "DESKTOP_BUCKET_ID":"5bbbf546c302b72b28aab603",
     "MOBILE_BUCKET_ID":"5bbbf546d98e0373c1f51287",
