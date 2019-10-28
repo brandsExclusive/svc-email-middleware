@@ -33,9 +33,11 @@ export async function index(
     );
   } catch (err) {
     console.log(err);
-    recommended = {
-      product_code: "default"
-    };
+    recommended.product_code = "default"
+  }
+  if (!recommended || !recommended.product_code) {
+    recommended = {}
+    recommended.product_code = "default"
   }
   const redirectUrl = buildImageUrl(
     recommended.product_code,
