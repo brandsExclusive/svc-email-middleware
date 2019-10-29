@@ -1,0 +1,7 @@
+{
+  date: {
+    dealId: {
+      position: count
+    }
+  }
+}

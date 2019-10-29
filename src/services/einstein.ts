@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { analytics } from "./analytics"
+import analytics from "../lib/analytics"
 
 const MID = process.env.MID || "100016247";
 const RECOMMENDATION = process.env.RECOMMENDATION || "home";
@@ -15,6 +15,7 @@ export default async function einstein(
   const data = await resp.json();
   if (resp.status === 200) {
     await redis.set(userId, JSON.stringify(data), "EX", CACHE_EXPIRY);
+    await analytics(data)
   } else {
     console.log(`Error getting recommendations from Einstein`);
     // TODO set default values to user key
