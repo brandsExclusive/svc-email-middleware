@@ -1,9 +1,7 @@
 import einstein from "../services/einstein";
-import * as Redis from "ioredis";
+import redis from "./redis"
 import timeout from "../lib/timeout";
 import { IRecommendation } from "../types";
-
-const redis = new Redis(process.env.REDIS_URL);
 
 export default async function recommendation(
   userId: string,
