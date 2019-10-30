@@ -16,15 +16,9 @@ export default function server(): any {
     linkController.index
   );
 
-  app.get(
-    "/api/recommendations/daily-views",
-    statsController.index
-  );
+  app.get("/api/recommendations/daily-views", statsController.index);
 
-  app.get(
-    "/api/recommendations/user-opens/:userId",
-    statsController.userOpens
-  );
+  app.get("/api/recommendations/user-opens/:userId", statsController.userOpens);
 
   return app;
 }
