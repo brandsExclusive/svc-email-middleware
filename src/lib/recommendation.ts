@@ -1,3 +1,4 @@
+import { Request } from "express";
 import einstein from "../services/einstein";
 import redis from "./redis"
 import timeout from "../lib/timeout";
@@ -6,7 +7,8 @@ import { IRecommendation } from "../types";
 export default async function recommendation(
   userId: string,
   recommendationId: string,
-  index: string
+  index: string,
+  req: Request
 ): Promise<IRecommendation> {
   return new Promise(
     async (resolve, reject): Promise<IRecommendation | void> => {
@@ -23,11 +25,11 @@ export default async function recommendation(
             "EX",
             15
           );
-          await einstein(userId, recommendationId, redis);
+          await einstein(userId, recommendationId, redis, req);
           allRecommendations = await redis.get(userId);
         } else {
           await timeout(20);
-          return resolve(recommendation(userId, recommendationId, index));
+          return resolve(recommendation(userId, recommendationId, index, req));
         }
       }
 

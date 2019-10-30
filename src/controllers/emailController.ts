@@ -29,7 +29,8 @@ export async function index(
     recommended = await recommendation(
       req.params.userId,
       req.params.recommendationId,
-      req.params.index
+      req.params.index,
+      req
     );
   } catch (err) {
     console.log(err);

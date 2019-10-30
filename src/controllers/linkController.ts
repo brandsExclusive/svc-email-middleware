@@ -8,7 +8,8 @@ export async function index(
   const recommended = await recommendation(
     req.params.userId,
     req.params.recommendationId,
-    req.params.index
+    req.params.index,
+    req
   );
   res.status(302);
   res.redirect(recommended.link);
