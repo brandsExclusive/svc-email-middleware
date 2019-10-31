@@ -7,18 +7,21 @@ export default function server(): any {
   const app: express.Application = express();
 
   app.get(
-    "/api/recommendations/email-image/:layout(mobile|desktop)/:index/:recommendationId/:userId",
+    "/api/email-middleware/email-image/:layout(mobile|desktop)/:index/:recommendationId/:userId",
     emailController.index
   );
 
   app.get(
-    "/api/recommendations/track-link/:index/:recommendationId/:userId",
+    "/api/email-middleware/track-link/:index/:recommendationId/:userId",
     linkController.index
   );
 
-  app.get("/api/recommendations/daily-views", statsController.index);
+  app.get("/api/email-middleware/daily-views", statsController.index);
 
-  app.get("/api/recommendations/user-opens/:userId", statsController.userOpens);
+  app.get(
+    "/api/email-middleware/user-opens/:userId",
+    statsController.userOpens
+  );
 
   return app;
 }

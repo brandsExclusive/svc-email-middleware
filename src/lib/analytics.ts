@@ -45,7 +45,8 @@ export async function userAnalytics(
     geoCity: req.headers["geo-city"],
     geoLat: req.headers["geo-latitude"],
     geoLong: req.headers["geo-longitude"],
-    isMobile: req.headers["cloudfront-is-mobile-viewer"],
+    isMobileHeader: req.headers["cloudfront-is-mobile-viewer"] === "true",
+    isMobileRequest: req.params.layout === "mobile",
     recommendations: recommendations
   };
   userData = userData.concat(data);
