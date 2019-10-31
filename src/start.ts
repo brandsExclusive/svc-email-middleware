@@ -10,6 +10,8 @@ import server from "./server";
 
 const port = process.env.PORT || 8080;
 
-server().listen(port, () => {
+const app = server().listen(port, () => {
   console.log(`Starting ${appEnv} server on port ${port}`);
 });
+
+module.exports = app;

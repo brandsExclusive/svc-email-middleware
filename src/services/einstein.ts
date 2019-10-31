@@ -17,8 +17,8 @@ export default async function einstein(redis: any, req: Request): Promise<any> {
       "EX",
       CACHE_EXPIRY
     );
-    await analytics(data);
-    await userAnalytics(req.params.userId, data, req);
+    analytics(data);
+    userAnalytics(data, req);
   } else {
     console.log(`Error getting recommendations from Einstein`);
     // TODO set default values to user key

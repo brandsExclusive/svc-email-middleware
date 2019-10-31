@@ -14,7 +14,6 @@ export async function index(
 
     If this is not set multiple calls will be made to Einstein costing us more money
   */
-  console.log(`headers: ${JSON.stringify(req.headers)}`);
   const latency = Math.floor(Math.random() * 50);
   const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true";
   const isMobileUrl = req.params.layout === "mobile";
@@ -22,9 +21,6 @@ export async function index(
   if (isMobileUrl || isMobileHeader) {
     isMobile = true;
   }
-  console.log(
-    `is mobile: ${isMobile} is mobile url ${isMobileUrl} is mobile header ${isMobileHeader} user agent: ${req.headers["user-agent"]}`
-  );
   await timeout(latency);
   let recommended;
   try {

@@ -2,13 +2,12 @@ import redis from "./redis";
 import { IRecommendations } from "../types";
 import { Request } from "express";
 
-export async function analytics(recommendation: IRecommendations[]): undefined {
+export async function analytics(recommendation: IRecommendations[]) {
   /*
  all recommendations get agregated and cached
  */
   const date = new Date();
   const dateKey = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-  await redis.del(dateKey);
   const result = JSON.parse(await redis.get(dateKey)) || { date: dateKey };
   recommendation.forEach(rec => {
     const recResult = result[rec.name] || {
@@ -33,13 +32,11 @@ export async function analytics(recommendation: IRecommendations[]): undefined {
 }
 
 export async function userAnalytics(
-  userId: string,
   recommendations: IRecommendations[],
   req: Request
-): undefined {
-  const key = `userData-${userId}`;
+) {
+  const key = `userData-${req.params.userId}`;
   let userData = JSON.parse(await redis.get(key)) || [];
-  console.log("what really is userData", userData);
   const data = {
     openTime: new Date().toISOString(),
     UserAgent: req.headers["user-agent"],

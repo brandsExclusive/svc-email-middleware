@@ -9,7 +9,7 @@
     "build": "rm -rf dist && tsc",
     "lint": "eslint src --ext .js,.ts",
     "lint-fix": "yarn run lint --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r ts-node/register tests/*.test.ts --exit"
   },
   "keywords": [],
   "author": "",
@@ -24,12 +24,20 @@
     "ts-node": "^8.2.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.4",
+    "@types/chai-http": "^4.2.0",
+    "@types/mocha": "^5.2.7",
+    "@types/nock": "^11.1.0",
     "@typescript-eslint/eslint-plugin": "^2.3.2",
     "@typescript-eslint/parser": "^2.2.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "dotenv-safe": "^6.1.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "mocha": "^6.2.2",
+    "nock": "^11.6.0",
     "nodemon": "^1.19.2",
     "prettier": "^1.18.2",
     "tslint": "^5.20.0",
