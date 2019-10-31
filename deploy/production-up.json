@@ -6,7 +6,7 @@
     "MID": "100016247",
     "REDIS_URL": "svc-email-middleware-test.wtwcbs.0001.apse2.cache.amazonaws.com:6379",
     "RECOMMENDATION": "testing-email",
-    "CACHE_EXPIRY": "10",
+    "CACHE_EXPIRY": "240",
     "DESKTOP_BUCKET_ID":"5bbbf546c302b72b28aab603",
     "MOBILE_BUCKET_ID":"5bbbf546d98e0373c1f51287",
     "APP_ENV": "production"
@@ -19,9 +19,7 @@
       "subnets": [
         "subnet-8e1b47f8",
         "subnet-44d3481d",
-        "subnet-6a19451c",
-        "subnet-28a9874c",
-        "subnet-6a19451c"
+        "subnet-7bde4522"
       ],
       "security_groups": [
           "sg-d20a27b5"
