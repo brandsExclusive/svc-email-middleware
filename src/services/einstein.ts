@@ -1,21 +1,24 @@
+import { Request } from "express";
 import fetch from "node-fetch";
+import { analytics, userAnalytics } from "../lib/analytics";
 
 const MID = process.env.MID || "100016247";
 const RECOMMENDATION = process.env.RECOMMENDATION || "home";
 const CACHE_EXPIRY = process.env.CACHE_EXPIRY || 10;
 
-export default async function einstein(
-  userId: string,
-  recommendationId: string,
-  redis: any
-): Promise<any> {
-  const url = `https://${MID}.recs.igodigital.com/a/v2/${MID}/${RECOMMENDATION}/recommend.json?email=${userId}`;
-  console.log('url used', url);
+export default async function einstein(redis: any, req: Request): Promise<any> {
+  const url = `https://${MID}.recs.igodigital.com/a/v2/${MID}/${RECOMMENDATION}/recommend.json?email=${req.params.userId}`;
   const resp = await fetch(url);
   const data = await resp.json();
-  console.log('return data', data);
   if (resp.status === 200) {
-    await redis.set(userId, JSON.stringify(data), "EX", CACHE_EXPIRY);
+    await redis.set(
+      req.params.userId,
+      JSON.stringify(data),
+      "EX",
+      CACHE_EXPIRY
+    );
+    analytics(data);
+    userAnalytics(data, req);
   } else {
     console.log(`Error getting recommendations from Einstein`);
     // TODO set default values to user key

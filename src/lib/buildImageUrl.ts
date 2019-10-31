@@ -5,11 +5,12 @@ const DESKTOP_BUCKET_ID =
 
 export default function buildImageUrl(
   productCode: string,
-  isMobile: boolean
+  isMobile: boolean,
+  locale = "au_au"
 ): string {
   if (isMobile) {
-    return `https://pi-templates.s3.us-east-1.amazonaws.com/production/${MOBILE_BUCKET_ID}/${productCode}~1.png`;
+    return `https://pi-templates.s3.us-east-1.amazonaws.com/production/${MOBILE_BUCKET_ID}/${productCode}~1_${locale}.png`;
   } else {
-    return `https://pi-templates.s3.us-east-1.amazonaws.com/production/${DESKTOP_BUCKET_ID}/${productCode}~1.png`;
+    return `https://pi-templates.s3.us-east-1.amazonaws.com/production/${DESKTOP_BUCKET_ID}/${productCode}~1_${locale}.png`;
   }
 }

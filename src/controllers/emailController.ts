@@ -14,38 +14,29 @@ export async function index(
 
     If this is not set multiple calls will be made to Einstein costing us more money
   */
-  console.log(`headers: ${JSON.stringify(req.headers)}`);
   const latency = Math.floor(Math.random() * 50);
-  const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true"
-  const isMobileUrl = req.params.layout === "mobile"
-  let isMobile = false
+  const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true";
+  const isMobileUrl = req.params.layout === "mobile";
+  let isMobile = false;
   if (isMobileUrl || isMobileHeader) {
-    isMobile = true
+    isMobile = true;
   }
-  console.log(`is mobile: ${isMobile} is mobile url ${isMobileUrl} is mobile header ${isMobileHeader} user agent: ${req.headers["user-agent"]}`);
   await timeout(latency);
   let recommended;
   try {
-    recommended = await recommendation(
-      req.params.userId,
-      req.params.recommendationId,
-      req.params.index
-    );
+    recommended = await recommendation(req);
   } catch (err) {
     console.log(err);
-    recommended.product_code = "default"
+    recommended.product_code = "default";
   }
   if (!recommended || !recommended.product_code) {
-    recommended = {}
-    recommended.product_code = "default"
+    recommended = {};
+    recommended.product_code = "default";
   }
-  const redirectUrl = buildImageUrl(
-    recommended.product_code,
-    isMobile
-  );
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
+  const redirectUrl = buildImageUrl(recommended.product_code, isMobile);
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  res.header("Expires", "-1");
+  res.header("Pragma", "no-cache");
   res.status(302);
   res.redirect(redirectUrl);
   return res.end();

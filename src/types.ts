@@ -3,3 +3,10 @@ export interface IRecommendation {
   name: string;
   link: string;
 }
+
+export interface IRecommendations {
+  name: string;
+  title: string;
+  priority: number;
+  items: IRecommendation[];
+}
