@@ -2,6 +2,8 @@ import redis from "./redis";
 import { IRecommendations } from "../types";
 import { Request } from "express";
 
+const RECOMMENDATION:string = process.env.RECOMMENDATION || 'home'
+
 export async function analytics(recommendation: IRecommendations[]) {
   /*
  all recommendations get agregated and cached
@@ -10,7 +12,7 @@ export async function analytics(recommendation: IRecommendations[]) {
   const dateKey = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
   const result = JSON.parse(await redis.get(dateKey)) || { date: dateKey };
   recommendation.forEach(rec => {
-    const recResult = result[rec.name] || {
+    const recResult = result[RECOMMENDATION] || {
       name: rec.name,
       title: rec.title,
       offers: {}
@@ -25,7 +27,7 @@ export async function analytics(recommendation: IRecommendations[]) {
       offerData.totalViews = offerData.totalViews + 1;
       offerData.indexViews[index] = offerData.indexViews[index] + 1 || 1;
       recResult.offers[item.product_code] = offerData;
-      result[rec.name] = recResult;
+      result[RECOMMENDATION] = recResult;
     }
   });
   await redis.set(dateKey, JSON.stringify(result), "EX", 60 * 60 * 24 * 30);
