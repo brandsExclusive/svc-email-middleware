@@ -17,6 +17,7 @@ export async function index(
   const latency = Math.floor(Math.random() * 50);
   const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true";
   const isMobileUrl = req.params.layout === "mobile";
+  const locale = req.query.locale;
   let isMobile = false;
   if (isMobileUrl || isMobileHeader) {
     isMobile = true;
@@ -33,7 +34,7 @@ export async function index(
     recommended = {};
     recommended.product_code = "default";
   }
-  const redirectUrl = buildImageUrl(recommended.product_code, isMobile);
+  const redirectUrl = buildImageUrl(recommended.product_code, isMobile, locale);
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
   res.header("Pragma", "no-cache");
