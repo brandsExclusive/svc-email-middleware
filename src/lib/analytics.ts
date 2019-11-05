@@ -52,7 +52,7 @@ export async function userAnalytics(
     recommendations: recommendations
   };
   userData = userData.concat(data);
-  userData.sort(function(a, b) {
+  userData = userData.sort(function(a, b) {
     return a.openTime < b.openTime ? -1 : a.openTime > b.openTime ? 1 : 0;
   });
   userData = userData.slice(0, 30);
