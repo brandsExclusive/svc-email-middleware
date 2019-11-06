@@ -12,10 +12,11 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
   };
   try {
     const resp = await fetch(url, options);
+    console.log(resp);
     const authUser = await resp.json();
     return { status: resp.status, user: authUser };
   } catch (err) {
-    console.log('error authenticating', err, resp);
+    console.log('error authenticating', err);
     return { status: 400, user: undefined };
   }
 }
