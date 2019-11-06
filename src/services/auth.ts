@@ -11,16 +11,13 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
     headers: requestHeaders
   };
   let resp;
-  let status;
   try {
     resp = await fetch(url, options);
   } catch (err) {
-    status = resp.status;
-    return { status, user: undefined };
+    return { status: resp.status, user: undefined };
   }
   if (resp.status !== 200) {
-    status = resp.status;
-    return { status, user: undefined };
+    return { status: resp.status, user: undefined };
   }
   const authUser = await resp.json();
   return { status: resp.status, user: authUser };
