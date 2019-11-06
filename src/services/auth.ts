@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 const endpoint = process.env.API_HOST || "api.luxgroup.com";
 
 export async function getUser(requestHeaders: any): Promise<AuthResponse> {
-  const url = "http://prod-svc-auth.lescapes.com/me";
+  const url = "http://prod-svc-auth.lescapes.com/current_user";
   console.log('whats the url', url);
   delete requestHeaders.host;
   requestHeaders.origin = 'https://luxuryescapes.com'
