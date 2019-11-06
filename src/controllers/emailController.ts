@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import recommendation from "../lib/recommendation";
 import buildImageUrl from "../lib/buildImageUrl";
 import timeout from "../lib/timeout";
+import * as useragent from "useragent";
 
 export async function index(
   req: Request,
@@ -15,7 +16,7 @@ export async function index(
     If this is not set multiple calls will be made to Einstein costing us more money
   */
   const latency = Math.floor(Math.random() * 50);
-  console.log('headers', req.headers);
+  console.log("headers", req.headers);
   const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true";
   const isMobileUrl = req.params.layout === "mobile";
   const locale = req.query.locale;
