@@ -7,6 +7,7 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
   const url = "https://api.luxgroup.com/me";
   console.log('whats the url', url);
   delete requestHeaders.host;
+  requestHeaders.origin = 'https://luxuryescapes.com'
   const options = {
     method: "GET",
     headers: requestHeaders
