@@ -5,11 +5,13 @@ const endpoint = process.env.API_HOST || "api.luxgroup.com";
 
 export async function getUser(requestHeaders: any): Promise<AuthResponse> {
   const url = "https://api.luxgroup.com/current_user";
+  console.log('whats the url', url);
   delete requestHeaders.host;
   const options = {
     method: "GET",
     headers: requestHeaders
   };
+  console.log('whats the headers', options);
   try {
     const resp = await fetch(url, options);
     if (resp.status !== 200) {
@@ -17,6 +19,7 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
       return {status: resp.status, user: undefined}
     }
     const authUser = await resp.json();
+    console.log('whats the user', authUser);
     return { status: resp.status, user: authUser };
   } catch (err) {
     console.log('error authenticating', err);
