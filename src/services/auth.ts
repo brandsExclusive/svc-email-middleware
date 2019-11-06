@@ -13,6 +13,7 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
   try {
     const resp = await fetch(url, options);
     if (resp.status !== 200) {
+      console.log(resp);
       return {status: resp.status, user: undefined}
     }
     const authUser = await resp.json();
