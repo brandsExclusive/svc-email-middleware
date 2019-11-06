@@ -53,4 +53,16 @@ describe('test image urls', () => {
          expect(resp.text).to.equal('Found. Redirecting to https://100016247.collect.igodigital.com/redirect/isdf')
     })
 
+    it("testing auth protection on daily views", async () => {
+         const resp = await chai.request(app).get('/api/email-middleware/daily-views')
+        expect(resp.status).to.equal(401)
+
+    })
+
+    it("testing auth protection on user views", async () => {
+         const resp = await chai.request(app).get('/api/email-middleware/user-opens/testing')
+        expect(resp.status).to.equal(401)
+
+    })
+
 });

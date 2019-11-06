@@ -9,7 +9,8 @@
     "CACHE_EXPIRY": "240",
     "DESKTOP_BUCKET_ID":"5db6574904789600499b50db",
     "MOBILE_BUCKET_ID":"5db6815b81f0a0004894a6cb",
-    "APP_ENV": "production"
+    "APP_ENV": "production",
+    "API_HOST": "api.luxgroup.com"
   },
   "error_pages": {
     "disable": true
