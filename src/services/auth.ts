@@ -10,12 +10,11 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
     method: "GET",
     headers: requestHeaders
   };
-  let resp;
   try {
-    resp = await fetch(url, options);
+    const resp = await fetch(url, options);
     const authUser = await resp.json();
     return { status: resp.status, user: authUser };
   } catch (err) {
-    return { status: resp.status, user: undefined };
+    return { status: 400, user: undefined };
   }
 }
