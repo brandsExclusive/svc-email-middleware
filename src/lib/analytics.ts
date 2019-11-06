@@ -2,7 +2,7 @@ import redis from "./redis";
 import { IRecommendations } from "../types";
 import { Request } from "express";
 
-const RECOMMENDATION:string = process.env.RECOMMENDATION || 'home'
+const RECOMMENDATION: string = process.env.RECOMMENDATION || "home";
 
 export async function analytics(recommendation: IRecommendations[]) {
   /*

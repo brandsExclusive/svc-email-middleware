@@ -10,3 +10,8 @@ export interface IRecommendations {
   priority: number;
   items: IRecommendation[];
 }
+
+export interface AuthResponse {
+  status: number;
+  user: any | null;
+}

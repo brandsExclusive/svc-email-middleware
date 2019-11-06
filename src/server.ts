@@ -2,6 +2,7 @@ import * as express from "express";
 import * as emailController from "./controllers/emailController";
 import * as linkController from "./controllers/linkController";
 import * as statsController from "./controllers/statsController";
+import { authMiddleware } from "./middleware/auth";
 
 export default function server(): any {
   const app: express.Application = express();
@@ -16,10 +17,15 @@ export default function server(): any {
     linkController.index
   );
 
-  app.get("/api/email-middleware/daily-views", statsController.index);
+  app.get(
+    "/api/email-middleware/daily-views",
+    authMiddleware,
+    statsController.index
+  );
 
   app.get(
     "/api/email-middleware/user-opens/:userId",
+    authMiddleware,
     statsController.userOpens
   );
 
