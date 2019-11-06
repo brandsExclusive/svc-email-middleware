@@ -13,12 +13,9 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
   let resp;
   try {
     resp = await fetch(url, options);
+    const authUser = await resp.json();
+    return { status: resp.status, user: authUser };
   } catch (err) {
     return { status: resp.status, user: undefined };
   }
-  if (resp.status !== 200) {
-    return { status: resp.status, user: undefined };
-  }
-  const authUser = await resp.json();
-  return { status: resp.status, user: authUser };
 }
