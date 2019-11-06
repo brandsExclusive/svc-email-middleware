@@ -15,7 +15,7 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
     const authUser = await resp.json();
     return { status: resp.status, user: authUser };
   } catch (err) {
-    console.log('error authenticating', err);
+    console.log('error authenticating', err, resp);
     return { status: 400, user: undefined };
   }
 }
