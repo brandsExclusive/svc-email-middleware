@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import recommendation from "../lib/recommendation";
 import buildImageUrl from "../lib/buildImageUrl";
 import timeout from "../lib/timeout";
+import * as useragent from "useragent";
 
 export async function index(
   req: Request,
