@@ -63,7 +63,7 @@ export async function userAnalytics(
     osVersion: req.headers["osVersion"],
     isMobileHeader: req.headers["cloudfront-is-mobile-viewer"] === "true",
     isMobileRequest: req.params.layout === "mobile",
-    isMobileDevice: req.headers["isMobileDevice"] === "phone",
+    isMobileDevice: req.headers["deviceType"] === "phone",
     region: req.headers["geo-region"],
     regionName: req.headers["geo-region-name"],
     continentCode: req.headers["geo-continent_code"],
