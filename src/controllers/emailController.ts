@@ -3,6 +3,7 @@ import recommendation from "../lib/recommendation";
 import buildImageUrl from "../lib/buildImageUrl";
 import timeout from "../lib/timeout";
 import * as useragent from "useragent";
+import { getDeviceData } from "../lib/analytics";
 
 export async function index(
   req: Request,
@@ -17,11 +18,14 @@ export async function index(
   */
   const latency = Math.floor(Math.random() * 50);
   console.log("headers", req.headers);
+  getDeviceData(req);
+  console.log(req.headers);
   const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true";
   const isMobileUrl = req.params.layout === "mobile";
+  const isMobileDevice = req.headers["isMobileDevice"] === "phone";
   const locale = req.query.locale;
   let isMobile = false;
-  if (isMobileUrl || isMobileHeader) {
+  if (isMobileUrl || isMobileHeader || isMobileDevice) {
     isMobile = true;
   }
   await timeout(latency);

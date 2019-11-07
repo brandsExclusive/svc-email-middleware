@@ -35,31 +35,43 @@ export async function analytics(recommendation: IRecommendations[]) {
   await redis.set(dateKey, JSON.stringify(result), "EX", 60 * 60 * 24 * 30);
 }
 
+export function getDeviceData(req: Request) {
+  const agent = useragent.parse(req.headers["user-agent"]);
+  const userDevice = Device(req.headers["user-agent"]);
+  req.headers["agentVersion"] = agent.toVersion();
+  req.headers["device"] = agent.device.toString();
+  req.headers["deviceVersion"] = agent.device.toVersion();
+  req.headers["deviceType"] = userDevice.type;
+  req.headers["os"] = agent.toString();
+  req.headers["osVersion"] = agent.os.toVersion();
+}
+
 export async function userAnalytics(
   recommendations: IRecommendations[],
   req: Request
 ) {
   const key = `userData-${req.params.userId}`;
   let userData = JSON.parse(await redis.get(key)) || [];
-  const agent = useragent.parse(req.headers["user-agent"]);
-  const userDevice = Device(req.headers["user-agent"]);
-  console.log("agent", agent);
   const data = {
     openTime: new Date().toISOString(),
-    UserAgent: req.headers["user-agent"],
-    agentVersion: agent.toVersion(),
-    device: agent.device.toString(),
-    deviceVersion: agent.device.toVersion(),
-    deviceType: userDevice.type,
-    os: agent.toString(),
-    osVersion: agent.os.toVersion(),
+    userAgent: req.headers["user-agent"],
+    agentVersion: req.headers["agentVersion"],
+    device: req.headers["device"],
+    deviceVersion: req.headers["deviceVersion"],
+    deviceType: req.headers["deviceType"],
+    os: req.headers["os"],
+    osVersion: req.headers["osVersion"],
     isMobileHeader: req.headers["cloudfront-is-mobile-viewer"] === "true",
     isMobileRequest: req.params.layout === "mobile",
-    geoRealIP: req.headers["geo-real-ip"],
-    geoCountryCode: req.headers["geo-country_code"],
-    geoCity: req.headers["geo-city"],
-    geoLat: req.headers["geo-latitude"],
-    geoLong: req.headers["geo-longitude"],
+    isMobileDevice: req.headers["isMobileDevice"] === "phone",
+    region: req.headers["geo-region"],
+    regionName: req.headers["geo-region-name"],
+    continentCode: req.headers["geo-continent_code"],
+    countryCode: req.headers["geo-country_code"],
+    city: req.headers["geo-city"],
+    geoCharset: req.headers["geo-charset"],
+    longitude: req.headers["geo-longitude"],
+    latitude: req.headers["geo-latitude"],
     recommendations: recommendations
   };
   userData = userData.concat(data);
