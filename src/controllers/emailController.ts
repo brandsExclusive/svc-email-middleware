@@ -22,7 +22,7 @@ export async function index(
   console.log(req.headers);
   const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true";
   const isMobileUrl = req.params.layout === "mobile";
-  const isMobileDevice = req.headers["deviceType"] === "phone";
+  const isMobileDevice = req.headers["deviceType"] ? true : false;
   const locale = req.query.locale;
   let isMobile = false;
   if (isMobileUrl || isMobileHeader || isMobileDevice) {
