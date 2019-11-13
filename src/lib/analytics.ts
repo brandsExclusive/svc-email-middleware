@@ -2,7 +2,7 @@ import redis from "./redis";
 import { IRecommendations } from "../types";
 import { Request } from "express";
 import * as useragent from "useragent";
-import * as Device from "device";
+import * as MobileDetect from "mobile-detect";
 
 const RECOMMENDATION: string = process.env.RECOMMENDATION || "home";
 
@@ -35,14 +35,20 @@ export async function analytics(recommendation: IRecommendations[]) {
   await redis.set(dateKey, JSON.stringify(result), "EX", 60 * 60 * 24 * 30);
 }
 
+function getUserAgentString(req: Request): string {
+  return req.headers["user-agent"] ? req.headers["user-agent"] : "";
+}
+
 export function getDeviceData(req: Request) {
-  const agent = useragent.parse(req.headers["user-agent"]);
-  const userDevice = Device(req.headers["user-agent"]);
+  const userAgentString = getUserAgentString(req);
+  const agent = useragent.parse(userAgentString);
+  const userDevice = new MobileDetect(userAgentString);
   req.headers["agentVersion"] = agent.toVersion();
   req.headers["device"] = agent.device.toString();
   req.headers["deviceVersion"] = agent.device.toVersion();
-  req.headers["deviceType"] = userDevice.type;
+  req.headers["deviceType"] = userDevice.mobile();
   req.headers["os"] = agent.toString();
+  req.headers["mobileOS"] = userDevice.os();
   req.headers["osVersion"] = agent.os.toVersion();
 }
 
@@ -60,6 +66,7 @@ export async function userAnalytics(
     deviceVersion: req.headers["deviceVersion"],
     deviceType: req.headers["deviceType"],
     os: req.headers["os"],
+    mobileOS: req.headers["mobileOS"],
     osVersion: req.headers["osVersion"],
     isMobileHeader: req.headers["cloudfront-is-mobile-viewer"] === "true",
     isMobileRequest: req.params.layout === "mobile",
