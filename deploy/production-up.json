@@ -7,8 +7,8 @@
     "REDIS_URL": "svc-email-middleware-test.wtwcbs.0001.apse2.cache.amazonaws.com:6379",
     "RECOMMENDATION": "testing-email",
     "CACHE_EXPIRY": "240",
-    "DESKTOP_BUCKET_ID":"5db6574904789600499b50db",
-    "MOBILE_BUCKET_ID":"5db6815b81f0a0004894a6cb",
+    "DESKTOP_BUCKET_ID":"5dc0d4b43a9746002c210ad1",
+    "MOBILE_BUCKET_ID":"5dc0d5a73f0e3d004d619810",
     "APP_ENV": "production",
     "API_HOST": "api.luxgroup.com"
   },
