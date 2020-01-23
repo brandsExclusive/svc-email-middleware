@@ -6,7 +6,7 @@
     "MID": "100016247",
     "REDIS_URL": "svc-email-middleware-prod-001.wtwcbs.0001.apse2.cache.amazonaws.com:6379",
     "RECOMMENDATION": "testing-email",
-    "CACHE_EXPIRY": "240",
+    "CACHE_EXPIRY": "43200",
     "DESKTOP_BUCKET_ID":"5dc0d4b43a9746002c210ad1",
     "MOBILE_BUCKET_ID":"5dc0d5a73f0e3d004d619810",
     "APP_ENV": "production",
