@@ -16,6 +16,7 @@
     "disable": true
   },
   "lambda": {
+    "runtime": "nodejs8.10",
     "vpc": {
       "subnets": [
         "subnet-8e1b47f8",
