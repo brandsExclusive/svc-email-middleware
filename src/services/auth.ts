@@ -1,5 +1,6 @@
 import { AuthResponse } from "../types";
 import fetch from "node-fetch";
+import { logger } from "../lib/logger";
 
 export async function getUser(requestHeaders: any): Promise<AuthResponse> {
   const url = "http://prod-svc-auth.lescapes.com/current_user";
@@ -12,13 +13,13 @@ export async function getUser(requestHeaders: any): Promise<AuthResponse> {
   try {
     const resp = await fetch(url, options);
     if (resp.status !== 200) {
-      console.log(resp);
+      logger("error", "AuthResponse", resp);
       return { status: resp.status, user: undefined };
     }
     const authUser = await resp.json();
     return { status: resp.status, user: authUser };
   } catch (err) {
-    console.log("error authenticating", err);
+    logger("error", "AuthResponse", err);
     return { status: 400, user: undefined };
   }
 }

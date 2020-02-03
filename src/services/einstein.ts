@@ -1,6 +1,7 @@
 import { Request } from "express";
 import fetch from "node-fetch";
 import { analytics, userAnalytics } from "../lib/analytics";
+import { logger } from "../lib/logger";
 
 const MID = process.env.MID || "100016247";
 const RECOMMENDATION = process.env.RECOMMENDATION || "home";
@@ -20,7 +21,7 @@ export default async function einstein(redis: any, req: Request): Promise<any> {
     analytics(data);
     userAnalytics(data, req);
   } else {
-    console.log(`Error getting recommendations from Einstein`);
+    logger("error", "Einstein", "Error getting recommendations from Einstein");
     // TODO set default values to user key
     // if status is not 200 set the default recommendation to the user key
   }

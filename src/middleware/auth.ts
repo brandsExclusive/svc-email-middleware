@@ -10,10 +10,13 @@ export async function authMiddleware(
   if (authResponse.status !== 200) {
     resp.status(authResponse.status);
     resp.end();
-  }
-  if (!authResponse.user || !authResponse.user.roles.includes("admin-user")) {
+  } else if (
+    !authResponse.user ||
+    !authResponse.user.roles.includes("admin-user")
+  ) {
     resp.status(403);
     resp.end();
+  } else {
+    next();
   }
-  next();
 }

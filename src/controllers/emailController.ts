@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import recommendation from "../lib/recommendation";
 import buildImageUrl from "../lib/buildImageUrl";
 import timeout from "../lib/timeout";
-import * as useragent from "useragent";
 import { getDeviceData } from "../lib/analytics";
+import { logger } from "../lib/logger";
 
 export async function index(
   req: Request,
@@ -17,9 +17,7 @@ export async function index(
     If this is not set multiple calls will be made to Einstein costing us more money
   */
   const latency = Math.floor(Math.random() * 50);
-  console.log("headers", req.headers);
   getDeviceData(req);
-  console.log(req.headers);
   const isMobileHeader = req.headers["cloudfront-is-mobile-viewer"] === "true";
   const isMobileUrl = req.params.layout === "mobile";
   const isMobileDevice = req.headers["deviceType"] ? true : false;
@@ -33,7 +31,7 @@ export async function index(
   try {
     recommended = await recommendation(req);
   } catch (err) {
-    console.log(err);
+    logger("error", "Recommendation", err);
     recommended.product_code = "default";
   }
   if (!recommended || !recommended.product_code) {

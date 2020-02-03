@@ -3,6 +3,7 @@ import einstein from "../services/einstein";
 import redis from "./redis";
 import timeout from "../lib/timeout";
 import { IRecommendation } from "../types";
+import { logger } from "../lib/logger";
 
 export default async function recommendation(
   req: Request
@@ -22,7 +23,9 @@ export default async function recommendation(
             "EX",
             15
           );
+          console.time("einstein");
           await einstein(redis, req);
+          logger("info", `${console.timeEnd("einstein")}`);
           allRecommendations = await redis.get(req.params.userId);
         } else {
           await timeout(20);
