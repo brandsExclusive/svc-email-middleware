@@ -44,7 +44,7 @@ describe('test image urls', () => {
     it("testing email images 302", async () => {
          const resp = await chai.request(app).get('/api/email-middleware/email-image/mobile/1/igdrec_1/testing').redirects(0)
          expect(resp.status).to.equal(302)
-         expect(resp.text).to.equal('Found. Redirecting to https://pi-templates.s3.us-east-1.amazonaws.com/production/5bbbf546d98e0373c1f51287/0060I00000csfBvQAI~1_au_au.png')
+         expect(resp.text).to.equal('Found. Redirecting to https://pi-templates.s3.us-east-1.amazonaws.com/production/5bbbf546d98e0373c1f51287/0060I00000csfBvQAI~1.png')
     })
 
     it("testing email links 302", async () => {
