@@ -5,7 +5,7 @@ import * as useragent from "useragent";
 import * as MobileDetect from "mobile-detect";
 
 const RECOMMENDATION: string = process.env.RECOMMENDATION || "home";
-const ANALYTICS_EXPIRY =  process.env.ANALYTICS_EXPIRY || 60 * 60 * 24 * 10
+const ANALYTICS_EXPIRY = process.env.ANALYTICS_EXPIRY || 60 * 60 * 24 * 10;
 
 export async function analytics(recommendation: IRecommendations[]) {
   /*
