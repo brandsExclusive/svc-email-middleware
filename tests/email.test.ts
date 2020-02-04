@@ -59,10 +59,4 @@ describe('test image urls', () => {
 
     })
 
-    it("testing auth protection on user views", async () => {
-         const resp = await chai.request(app).get('/api/email-middleware/user-opens/testing')
-        expect(resp.status).to.equal(401)
-
-    })
-
 });

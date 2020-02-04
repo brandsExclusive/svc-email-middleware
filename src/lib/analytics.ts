@@ -3,6 +3,7 @@ import { IRecommendations } from "../types";
 import { Request } from "express";
 import * as useragent from "useragent";
 import * as MobileDetect from "mobile-detect";
+import { logger } from "../lib/logger";
 
 const RECOMMENDATION: string = process.env.RECOMMENDATION || "home";
 const ANALYTICS_EXPIRY = process.env.ANALYTICS_EXPIRY || 60 * 60 * 24 * 10;
@@ -57,9 +58,8 @@ export async function userAnalytics(
   recommendations: IRecommendations[],
   req: Request
 ) {
-  const key = `userData-${req.params.userId}`;
-  let userData = JSON.parse(await redis.get(key)) || [];
   const data = {
+    userId: req.params.userId,
     openTime: new Date().toISOString(),
     userAgent: req.headers["user-agent"],
     agentVersion: req.headers["agentVersion"],
@@ -82,10 +82,5 @@ export async function userAnalytics(
     latitude: req.headers["geo-latitude"],
     recommendations: recommendations
   };
-  userData = userData.concat(data);
-  userData = userData.sort(function(a, b) {
-    return b.openTime < a.openTime ? -1 : b.openTime > a.openTime ? 1 : 0;
-  });
-  userData = userData.slice(0, 30);
-  await redis.set(key, JSON.stringify(userData), "EX", ANALYTICS_EXPIRY);
+  logger("info", "User Analytics", data);
 }
