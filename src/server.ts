@@ -23,11 +23,5 @@ export default function server(): any {
     statsController.index
   );
 
-  app.get(
-    "/api/email-middleware/user-opens/:userId",
-    authMiddleware,
-    statsController.userOpens
-  );
-
   return app;
 }

@@ -24,13 +24,3 @@ export async function index(
   res.setHeader("Content-Type", "application/json");
   return res.end(JSON.stringify(response));
 }
-
-export async function userOpens(
-  req: Request,
-  res: Response
-): Promise<Response | void> {
-  const key = `userData-${req.params.userId}`;
-  const results = await redis.get(key);
-  res.setHeader("Content-Type", "application/json");
-  return res.end(results);
-}
