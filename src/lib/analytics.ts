@@ -5,6 +5,7 @@ import * as useragent from "useragent";
 import * as MobileDetect from "mobile-detect";
 
 const RECOMMENDATION: string = process.env.RECOMMENDATION || "home";
+const ANALYTICS_EXPIRY = process.env.ANALYTICS_EXPIRY || 60 * 60 * 24 * 10;
 
 export async function analytics(recommendation: IRecommendations[]) {
   /*
@@ -32,7 +33,7 @@ export async function analytics(recommendation: IRecommendations[]) {
       result[RECOMMENDATION] = recResult;
     }
   });
-  await redis.set(dateKey, JSON.stringify(result), "EX", 60 * 60 * 24 * 30);
+  await redis.set(dateKey, JSON.stringify(result), "EX", ANALYTICS_EXPIRY);
 }
 
 function getUserAgentString(req: Request): string {
@@ -86,5 +87,5 @@ export async function userAnalytics(
     return b.openTime < a.openTime ? -1 : b.openTime > a.openTime ? 1 : 0;
   });
   userData = userData.slice(0, 30);
-  await redis.set(key, JSON.stringify(userData));
+  await redis.set(key, JSON.stringify(userData), "EX", ANALYTICS_EXPIRY);
 }
