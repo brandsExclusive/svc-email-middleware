@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "ioredis": "^4.14.1",
     "mobile-detect": "^1.4.4",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "ts-node": "^8.2.0",
     "useragent": "^2.3.0"
   },
